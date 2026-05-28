@@ -19,4 +19,4 @@ program
     await runwakeup();
   });
 
-await program.parseAsync(program.args);
+await program.parseAsync(process.argv);
