@@ -30,15 +30,15 @@ export class ActionTracker {
 
   getPendingMutations(): ActionLog[] {
     return this.actions.filter(
-        (a) => isMutationType(a.type) && a.status === "pending"
-    )
+      (a) => isMutationType(a.type) && a.status === "pending",
+    );
   }
 
-  updateStatus(id: string, status: ActionStatus, userApproved?:boolean): void {
+  updateStatus(id: string, status: ActionStatus, userApproved?: boolean): void {
     const a = this.actions.find((x) => x.id === id);
-    if(!a) return;
+    if (!a) return;
     a.status = status;
 
-    if(userApproved !== undefined) a.userApproved = userApproved;
+    if (userApproved !== undefined) a.userApproved = userApproved;
   }
 }
