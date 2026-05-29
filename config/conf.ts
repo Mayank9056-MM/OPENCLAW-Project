@@ -1,14 +1,21 @@
 import { z } from "zod";
 
-export const configSchema = z.object({
+const envSchema = z.object({
   features: z
     .object({
-      cli: z.boolean().default(true),
-      telegramBot: z.boolean().default(false),
+      cli: z.boolean(),
+      telegramBot: z.boolean(),
     })
-    .default({ cli: true, telegramBot: false }),
+    .default({
+      cli: false,
+      telegramBot: false,
+    }),
+
+  // OPEN ROUTER
+  OPENROUTER_API_KEY: z.string().default(""),
+  OPENROUTER_DEFAULT_MODEL: z.string().default("openrouter/free"),
 });
 
-export type Config = z.infer<typeof configSchema>;
+export const config = envSchema.parse(process.env);
 
-export const config: Config = configSchema.parse(process.env);
+export type Config = z.infer<typeof envSchema>;
