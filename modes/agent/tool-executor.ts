@@ -189,7 +189,7 @@ export class ToolExecutor {
     return `staged delete: ${key}`;
   }
 
-    createFolder(rel: string): string {
+  createFolder(rel: string): string {
     if (!this.config.tools.allowFolderCreation)
       throw new Error("Folder creation disabled");
     this.assertNotExcluded(rel, "create_folder");
@@ -203,7 +203,7 @@ export class ToolExecutor {
     return `Staged folder: ${key}`;
   }
 
-
+  
   listFiles(rel: string, recursive: boolean): string {
     this.assertNotExcluded(rel, "list_files");
     const abs = this.resolvesafe(rel);
@@ -238,7 +238,7 @@ export class ToolExecutor {
     return out || "(empty)";
   }
 
-    searchFiles(
+  searchFiles(
     rootRel: string,
     globPattern: string,
     contentQuery?: string,
@@ -399,7 +399,7 @@ export class ToolExecutor {
 
   applyApprovedFromTracker(): { errors: string[] } {
     const errors: string[] = [];
-    const all = [...this.tracker.gtAction()];
+    const all = [...this.tracker.getActions()];
 
     for (const a of all.filter(
       (x) => x.type === "folder_create" && x.status === "approved",
@@ -456,8 +456,8 @@ export class ToolExecutor {
     return { errors };
   }
 
-  clearStaging():void{
-    this.overlay.clear()
-    this.deleted.clear()
+  clearStaging(): void {
+    this.overlay.clear();
+    this.deleted.clear();
   }
 }
