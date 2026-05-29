@@ -2,6 +2,7 @@ import { select, isCancel } from "@clack/prompts";
 import chalk from "chalk";
 import figlet from "figlet";
 import { config } from "../config/conf";
+import { runcliMode } from "../modes/cli";
 
 const BANNER_FONT = "ANSI Shadow";
 const SHADOW = chalk.hex("#5b4d9e");
@@ -23,6 +24,7 @@ function printBannerWithShadow(ascii: string) {
 }
 
 export async function runwakeup() {
+
   let ascii: string;
   try {
     ascii = figlet.textSync("Mr.Jack", { font: BANNER_FONT });
@@ -38,31 +40,36 @@ export async function runwakeup() {
         value: "cli",
         label: "CLI",
         hint: "The CLI mode is the most basic and straightforward way to interact with the assistant. It allows you to type commands directly into the terminal and receive immediate responses. This mode is ideal for users who prefer a simple and efficient interface without any distractions.",
-        disabled: config.features.cli
+        disabled: config.features.cli,
       },
       {
         value: "telegram",
         label: "Telegram",
         hint: "Telegram bot is currently in development and will be available soon.",
-        disabled: config.features.telegramBot
+        disabled: config.features.telegramBot,
+      },
+      {
+        value: "exit",
+        label: "Exit",
+        hint: "Turn off the assistant",
       },
     ],
   });
 
-  if (isCancel(node)) {
-    console.log(chalk.red("Operation cancelled."));
+  if (isCancel(node || node === "exit")) {
+    console.log(chalk.red("Operation cancelled. \n Goodbye Sir"));
     process.exit(0);
   }
 
   if (node === "cli") {
-    console.log(
-      chalk.green("You have selected CLI mode. Starting the assistant..."),
-    );
+     await runcliMode()
   } else if (node === "telegram") {
     console.log(
       chalk.yellow(
         "Telegram bot is currently in development and will be available soon. Please select CLI mode for now.",
       ),
     );
+  } else if (node === "exit") {
+    console.log(chalk.gray("Exiting the assitant good bye!"));
   }
 }
