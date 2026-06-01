@@ -1,0 +1,21 @@
+image: node:20
+
+stages:
+  - build
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+
+  before_script:
+    - npm ci
+
+  script:
+    - npm run build
+
+  only:
+    - braches
+    - merge_requests
