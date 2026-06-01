@@ -12,8 +12,11 @@ const envSchema = z.object({
     }),
 
   // OPEN ROUTER
-  OPENROUTER_API_KEY: z.string().default(""),
+  OPENROUTER_API_KEY: z.string(),
   OPENROUTER_DEFAULT_MODEL: z.string().default("openrouter/free"),
+
+  // FIRE CRAWL
+  FIRE_API_KEY: z.string(),
 });
 
 export const config = envSchema.parse(process.env);

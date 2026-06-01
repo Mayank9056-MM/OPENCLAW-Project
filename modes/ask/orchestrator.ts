@@ -8,6 +8,7 @@ import { ActionTracker } from "../agent/action-tracker";
 import { getAgentModel } from "../../ai";
 import { renderTerminalMarkdown } from "../../tui/terminal-md";
 import { runApprovalFlow } from "../agent/approval";
+import { createWebTools } from "../plan/web-tools";
 
 function createAskTools(executor: ToolExecutor) {
   return {
@@ -94,10 +95,9 @@ export  async function runAskMode(){
 
     const executor = new ToolExecutor(tracker, config)
 
-    // TODO: web search tool, using firecrawl
-
     const tools = {
-        ...createAskTools(executor)
+        ...createAskTools(executor),
+        ...createWebTools(tracker)
     }
 
     const agent = new ToolLoopAgent({
