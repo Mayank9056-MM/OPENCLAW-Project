@@ -5,28 +5,29 @@ on:
     branches:
       - main
       - develop
-    pull_request:
+  
+  pull_request:
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-      strategy:
-        matrix:
-          node-version: [20]
+    strategy:
+      matrix:
+        node-version: [20]
 
-      steps: 
-        - name: checkout code
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: ${{ matrix.node-version }}
-            cache: npm
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
 
-        - name: Install dependencies
-          run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-        - name: Build project
-          run: npm run build
+      - name: Build project
+        run: npm run build
