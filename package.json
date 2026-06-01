@@ -6,6 +6,12 @@
   "bin": {
     "Mr.Jack": "./index.ts"
   },
+  "scripts": {
+    "dev": "bun run index.ts",
+    "start": "bun run index.ts",
+    "build": "bun build index.ts --outdir dist",
+    "typecheck": "tsc --noEmit"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^25.9.1"
