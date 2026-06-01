@@ -10,11 +10,9 @@ cache:
 build:
   stage: build
 
-  before_script:
-    - npm ci
-
   script:
-    - npm run build
+    - bun install
+    - bun run build
 
   only:
     - braches
