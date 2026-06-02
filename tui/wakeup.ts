@@ -3,6 +3,7 @@ import chalk from "chalk";
 import figlet from "figlet";
 import { config } from "../config/conf";
 import { runcliMode } from "../modes/cli";
+import { runTelegramMode } from "../telegram";
 
 const BANNER_FONT = "ANSI Shadow";
 const SHADOW = chalk.hex("#5b4d9e");
@@ -64,11 +65,7 @@ export async function runwakeup() {
   if (node === "cli") {
      await runcliMode()
   } else if (node === "telegram") {
-    console.log(
-      chalk.yellow(
-        "Telegram bot is currently in development and will be available soon. Please select CLI mode for now.",
-      ),
-    );
+     await runTelegramMode()
   } else if (node === "exit") {
     console.log(chalk.gray("Exiting the assitant good bye!"));
   }
