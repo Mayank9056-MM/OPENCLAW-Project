@@ -1,0 +1,14 @@
+flowchart TB
+  User[User] --> CLI[CLI / TUI]
+  User --> Telegram[Telegram Bot]
+  CLI --> Modes[Ask / Plan / Agent Modes]
+  Telegram --> Modes
+  Modes --> AI[AI SDK + OpenRouter Model]
+  AI --> Tools[Workspace / Web / Skill Tools]
+  Tools --> Executor[ToolExecutor]
+  Tools --> Tracker[ActionTracker]
+  Executor --> Tracker
+  Tracker --> Approval[Approval Workflow]
+  Approval --> Executor
+  Executor --> Workspace[(Workspace Files and Shell)]
+  Tools --> Firecrawl[Firecrawl / fetch]
