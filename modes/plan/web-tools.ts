@@ -12,7 +12,7 @@ function getClient(): Firecrawl {
   }
 
   client = new Firecrawl({
-    apiKey: config.FIRE_API_KEY,
+    apiKey: config.FIRECRAWL_API_KEY,
   });
 
   return client;
