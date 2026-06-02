@@ -107,7 +107,7 @@ export async function generatePlan(goal: string) {
   const tracker = new ActionTracker();
   const executor = new ToolExecutor(tracker, config);
 
-  const hasWeb = Boolean(envConfig.FIRE_API_KEY);
+  const hasWeb = Boolean(envConfig.FIRECRAWL_API_KEY);
   const model = wrapLanguageModel({
     model: getAgentModel(),
     middleware: extractJsonMiddleware(),
