@@ -1,0 +1,20 @@
+sequenceDiagram
+  actor Owner
+  participant Bot as Telegraf Bot
+  participant Auth as Owner Check
+  participant Handler
+  participant Runner
+  participant Session as Plan/Approval Session
+  participant Executor
+
+  Owner->>Bot: Send command or callback
+  Bot->>Auth: Compare chat ID
+  Auth-->>Bot: Authorized
+  Bot->>Handler: Dispatch update
+  Handler->>Runner: Run ask, agent, or plan workflow
+  Runner->>Executor: Use tools and stage changes
+  Runner->>Session: Store selection or approval state
+  Session-->>Owner: Inline keyboard response
+  Owner->>Bot: Select callback action
+  Bot->>Session: Load session
+  Session->>Executor: Apply or clear staging

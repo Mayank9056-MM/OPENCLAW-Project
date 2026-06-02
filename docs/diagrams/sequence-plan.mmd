@@ -1,0 +1,18 @@
+sequenceDiagram
+  actor User
+  participant Planner
+  participant Model as AI Model
+  participant Tools as Read-only/Web Tools
+  participant Selector
+  participant Runner as Step Runner
+  participant Approval
+
+  User->>Planner: Provide goal
+  Planner->>Model: Request structured plan
+  Model->>Tools: Research codebase or web
+  Tools-->>Model: Observations
+  Model-->>Planner: Plan JSON
+  Planner->>Selector: Present plan
+  User->>Selector: Select steps
+  Selector->>Runner: Execute selected steps
+  Runner->>Approval: Review staged mutations

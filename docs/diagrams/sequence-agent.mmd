@@ -1,0 +1,20 @@
+sequenceDiagram
+  actor User
+  participant UI as CLI or Telegram
+  participant Orchestrator as Agent Orchestrator
+  participant Agent as ToolLoopAgent
+  participant Executor as ToolExecutor
+  participant Tracker as ActionTracker
+  participant Approval as Approval UI
+  participant Workspace as Workspace
+
+  User->>UI: Submit agent goal
+  UI->>Orchestrator: Start Agent Mode
+  Orchestrator->>Agent: Generate with tools
+  Agent->>Executor: Read/search/stage operations
+  Executor->>Tracker: Log actions
+  Agent-->>Orchestrator: Response text
+  Orchestrator->>Approval: Review pending mutations
+  Approval->>Tracker: Mark approved or rejected
+  Orchestrator->>Executor: Apply approved actions
+  Executor->>Workspace: Write/delete/mkdir/run shell
