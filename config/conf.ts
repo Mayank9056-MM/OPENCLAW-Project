@@ -16,7 +16,11 @@ const envSchema = z.object({
   OPENROUTER_DEFAULT_MODEL: z.string().default("openrouter/free"),
 
   // FIRE CRAWL
-  FIRE_API_KEY: z.string(),
+  FIRECRAWL_API_KEY: z.string(),
+
+  // TELEGRAM 
+  TELEGRAM_BOT_TOKEN: z.string(),
+  TELEGRAM_OWNER_ID: z.string(),
 });
 
 export const config = envSchema.parse(process.env);
