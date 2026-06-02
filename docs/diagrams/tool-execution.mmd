@@ -1,0 +1,16 @@
+flowchart TD
+  Call[AI tool call] --> Schema[Validate input schema]
+  Schema --> Safe[Check path and tool policy]
+  Safe --> Type{Tool type}
+  Type -->|Read / analysis| Read[Read file, list, search, analyze]
+  Read --> Executed[Log executed code_analysis]
+  Type -->|File mutation| StageFile[Update overlay or deleted set]
+  StageFile --> PendingFile[Log pending file action]
+  Type -->|Folder creation| StageFolder[Log pending folder action]
+  Type -->|Shell| StageShell[Log pending shell command]
+  PendingFile --> Approval[Approval workflow]
+  StageFolder --> Approval
+  StageShell --> Approval
+  Approval -->|Approved| Apply[Apply approved actions]
+  Approval -->|Rejected| Clear[Clear staging]
+  Apply --> Clear
